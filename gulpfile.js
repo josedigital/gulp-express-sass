@@ -4,6 +4,7 @@ var env         = require('minimist')(process.argv.slice(2));
 var gulp        = require('gulp');
 var sass        = require('gulp-sass');
 var handlebars  = require('gulp-compile-handlebars');
+var clean       = require('gulp-clean');
 var rename      = require('gulp-rename');
 var bourbon     = require('node-bourbon').includePaths;
 var neat        = require('node-neat').includePaths;
@@ -19,15 +20,10 @@ var imagemin    = require('gulp-imagemin');
 var cache       = require('gulp-cache');
 var pageData    = require('./models/data');
 
-var paths = {
-    scss: './src/sass/*.scss',
-    views: './views/**/!(_)*.hbs'
-};
-
 
 gulp.task('hbs', function () {
   var options = {
-     batch : ['views/layouts']
+    batch: ['views/layouts']
   }
   return gulp.src('views/**/*.hbs')
     .pipe(plumber())
@@ -36,6 +32,10 @@ gulp.task('hbs', function () {
     .pipe(gulp.dest('public'));
 });
 
+gulp.task('cleandir', function () {
+  return gulp.src('public/layouts', {read: false})
+    .pipe(clean());
+});
 
 
 gulp.task('sass', function() {
@@ -92,6 +92,8 @@ gulp.task('browser-sync', ['nodemon'], function() {
     port: 4000
   });
 });
+
+gulp.task('html', ['hbs', 'cleandir']);
 
 
 // Default task
