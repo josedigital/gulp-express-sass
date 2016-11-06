@@ -1,8 +1,9 @@
 @import 'bourbon';
+@import 'core/base';
 @import 'neat';
 
 body {
-  @include linear-gradient(#eee, #e2e2e2);
+  @include linear-gradient(#eee, #aaa);
   p {
     color: #444;
   }
