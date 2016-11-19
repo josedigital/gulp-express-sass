@@ -3,7 +3,8 @@
 @import 'neat';
 
 body {
-  @include linear-gradient(#eee, #aaa);
+  //@include linear-gradient(#eee, #aaa);
+  background-color: #f3f3f3;
   p {
     color: #444;
   }
